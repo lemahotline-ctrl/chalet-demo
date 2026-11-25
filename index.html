@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0b6e8a"><title>شاليهاتي | العين السخنة</title>
+<style>
+:root{--p:#0b6e8a;--p2:#0a4f66;--a:#f59e0b;--bg:#f3f6f8;--c:#fff;--t:#14262e;--m:#6b7c85;--g:#16a34a;--r:#dc2626;--b:#e3eaee}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Segoe UI",Tahoma,Arial,sans-serif;background:#dfe7ec;color:var(--t);display:flex;justify-content:center}
+#app{width:100%;max-width:460px;min-height:100vh;background:var(--bg);position:relative;padding-bottom:70px;box-shadow:0 0 40px #0002}
+header{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:18px 16px 22px;border-radius:0 0 24px 24px}
+header h1{font-size:20px;display:flex;justify-content:space-between;align-items:center}
+header p{opacity:.85;font-size:13px;margin-top:4px}
+.badge{background:#fff3;border-radius:20px;padding:3px 10px;font-size:11px}
+.search{display:flex;gap:8px;margin-top:14px}
+.search input,.search select{flex:1;border:0;border-radius:12px;padding:11px;font:inherit;font-size:13px;min-width:0}
+.pad{padding:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 14px 0}
+.chip{white-space:nowrap;padding:7px 14px;border-radius:20px;background:#fff;border:1px solid var(--b);font-size:13px;cursor:pointer}
+.chip.on{background:var(--p);color:#fff;border-color:var(--p)}
+.card{background:var(--c);border-radius:18px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 10px #0001;cursor:pointer}
+.img{height:150px;position:relative;display:flex;align-items:flex-end;padding:10px;color:#fff;font-weight:700}
+.img svg{position:absolute;inset:0;width:100%;height:100%}
+.tag{position:absolute;top:10px;right:10px;background:#0009;border-radius:10px;padding:3px 9px;font-size:11px;z-index:2}
+.cb{padding:12px 14px}
+.cb h3{font-size:16px}.cb .loc{color:var(--m);font-size:12px;margin:3px 0 8px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.price{color:var(--p);font-weight:800;font-size:17px}.price small{color:var(--m);font-weight:400;font-size:11px}
+.feat{display:flex;gap:10px;font-size:12px;color:var(--m);flex-wrap:wrap}
+.star{color:var(--a);font-weight:700;font-size:13px}
+.btn{display:block;width:100%;border:0;border-radius:14px;background:var(--p);color:#fff;padding:14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;text-align:center}
+.btn.o{background:var(--a)}.btn.g{background:var(--g)}.btn.l{background:#fff;color:var(--p);border:1px solid var(--p)}
+.btn:disabled{background:#b8c4ca}
+nav{position:fixed;bottom:0;width:100%;max-width:460px;background:#fff;display:flex;border-top:1px solid var(--b);z-index:10}
+nav div{flex:1;text-align:center;padding:9px 0 7px;font-size:11px;color:var(--m);cursor:pointer}
+nav div.on{color:var(--p);font-weight:700}nav b{display:block;font-size:20px;font-weight:400}
+.top{display:flex;align-items:center;gap:10px;padding:14px;background:#fff;border-bottom:1px solid var(--b);position:sticky;top:0;z-index:5}
+.top .back{font-size:22px;cursor:pointer}.top h2{font-size:16px;flex:1}
+.sec{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px}
+.sec h4{margin-bottom:8px;font-size:14px}
+.am{display:flex;flex-wrap:wrap;gap:8px}.am span{background:var(--bg);padding:6px 11px;border-radius:10px;font-size:12px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:12px}
+.cal .h{color:var(--m);font-size:11px}
+.d{padding:8px 0;border-radius:9px;background:#e7f6ec;color:#0f6b31;cursor:pointer}
+.d.x{background:#eceff1;color:#aab;text-decoration:line-through;cursor:not-allowed}
+.d.s{background:var(--p);color:#fff}.d.r{background:#cfe8f0;color:var(--p2)}
+.sum div{display:flex;justify-content:space-between;padding:6px 0;font-size:14px}
+.sum .tot{border-top:1px dashed var(--b);margin-top:4px;padding-top:10px;font-weight:800}
+.note{background:#fff8e6;border:1px solid #fde4a3;border-radius:12px;padding:10px;font-size:12px;color:#7a5a00;margin:10px 0}
+.ok{background:#e7f6ec;border-color:#b8e6c6;color:#0f6b31}
+.chat{display:flex;flex-direction:column;height:calc(100vh - 130px)}
+.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:78%;padding:9px 12px;border-radius:16px;font-size:14px;line-height:1.5}
+.m.me{background:var(--p);color:#fff;align-self:flex-start;border-bottom-right-radius:4px}
+.m.ot{background:#fff;align-self:flex-end;border-bottom-left-radius:4px}
+.m.sys{align-self:center;background:#fdecec;color:var(--r);font-size:12px;max-width:92%;text-align:center}
+.cin{display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid var(--b)}
+.cin input{flex:1;border:1px solid var(--b);border-radius:20px;padding:11px 14px;font:inherit;font-size:14px}
+.cin button{border:0;background:var(--p);color:#fff;border-radius:50%;width:44px;font-size:18px}
+input.f,select.f{width:100%;border:1px solid var(--b);border-radius:12px;padding:12px;font:inherit;margin-bottom:10px;background:#fff}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.stat div{background:#fff;border-radius:16px;padding:14px}.stat b{display:block;font-size:22px;color:var(--p)}.stat span{font-size:12px;color:var(--m)}
+.li{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--b);font-size:13px}
+.st{padding:3px 9px;border-radius:10px;font-size:11px}.st.g{background:#e7f6ec;color:#0f6b31}.st.y{background:#fff3d6;color:#8a5a00}
+.role{display:flex;gap:6px;margin-top:12px}.role div{flex:1;text-align:center;padding:8px 4px;border-radius:10px;background:#fff2;font-size:12px;cursor:pointer}.role .on{background:#fff;color:var(--p);font-weight:700}
+.modal{position:fixed;inset:0;background:#000a;display:flex;align-items:flex-end;justify-content:center;z-index:50}
+.modal>div{background:#fff;width:100%;max-width:460px;border-radius:22px 22px 0 0;padding:20px}
+.big{font-size:40px;text-align:center}
+.ph{font-size:22px;font-weight:800;color:var(--p);text-align:center;direction:ltr;margin:10px 0}
+</style></head><body><div id="app"></div>
+<script>
+const ICON={beach:'M0 100 Q50 80 100 100 T200 100 T300 100 T400 100 V150 H0Z',};
+const CH=[
+{id:1,n:"شاليه لاجونا الفاخر",l:"لاجونا بيتش، العين السخنة",p:3200,r:4.9,rv:48,bd:3,g:8,t:"فيلا 3 غرف",o:"م. أحمد",ph:"01012345678",c:["#0b6e8a","#38bdf8"],am:["بحر مباشر","حمام سباحة","تكييف","واي فاي","شواء","أمن 24 ساعة"],bk:[3,4,5,12,13]},
+{id:2,n:"شاليه بورتو سخنة",l:"بورتو السخنة",p:2400,r:4.7,rv:112,bd:2,g:6,t:"شاليه غرفتين",o:"أ. منى",ph:"01123456789",c:["#7c3aed","#a78bfa"],am:["إطلالة بحر","حمام سباحة","تكييف","ملاعب أطفال","جراج"],bk:[8,9,10,20]},
+{id:3,n:"شاليه لا فيستا الدور الأرضي",l:"لا فيستا، العين السخنة",p:4500,r:4.8,rv:67,bd:3,g:10,t:"دور أرضي بحديقة",o:"أ. كريم",ph:"01234567890",c:["#ea580c","#fbbf24"],am:["حديقة خاصة","بحر مباشر","حمام سباحة","تكييف","واي فاي","مطبخ كامل"],bk:[1,2,15,16,17]},
+{id:4,n:"شاليه عتاقة سيتي",l:"جبل عتاقة، العين السخنة",p:1600,r:4.5,rv:29,bd:1,g:4,t:"استوديو",o:"أ. سامي",ph:"01512345678",c:["#059669","#6ee7b7"],am:["تكييف","واي فاي","قريب من البحر","جراج"],bk:[6,7,22,23]},
+];
+const S={role:'cus',tab:'home',f:'all',q:'',cur:null,sel:[],paid:{},chats:{},bookings:[],owner:CH.slice(0,2).map(x=>({...x})),modal:null,pay:false};
+const $=s=>document.querySelector(s),fmt=n=>Number(n).toLocaleString('ar-EG');
+const img=c=>`<div class="img" style="background:linear-gradient(160deg,${c[0]},${c[1]})"><svg viewBox="0 0 400 150" preserveAspectRatio="none"><circle cx="330" cy="40" r="22" fill="#fff5"/><path d="M0 105 Q50 90 100 105 T200 105 T300 105 T400 105 V150 H0Z" fill="#fff3"/><path d="M0 125 Q60 110 120 125 T240 125 T360 125 T480 125 V150 H0Z" fill="#fff4"/><path d="M60 100 L110 62 L160 100Z M72 100 V86 M148 100 V86" fill="#fff8"/></svg>`;
+function home(){const list=CH.filter(c=>(S.f=='all'||(S.f=='pool'&&c.am.includes('حمام سباحة'))||(S.f=='sea'&&c.am.some(a=>a.includes('بحر')))||(S.f=='cheap'&&c.p<=2400))&&(c.n+c.l).includes(S.q));
+return `<header><h1><span>🏖️ شاليهاتي</span><span class="badge">العين السخنة</span></h1><p>احجز شاليهك المفضل مباشرة من المالك</p>
+<div class="search"><input id="q" placeholder="ابحث باسم الشاليه أو المنطقة..." value="${S.q}" oninput="S.q=this.value;draw(true)"></div>
+${rolebar()}</header>
+<div class="chips">${[['all','الكل'],['sea','على البحر'],['pool','حمام سباحة'],['cheap','اقتصادي']].map(([k,v])=>`<div class="chip ${S.f==k?'on':''}" onclick="S.f='${k}';draw()">${v}</div>`).join('')}</div>
+<div class="pad" id="list">${list.map(card).join('')||'<p style="text-align:center;color:var(--m)">لا نتائج</p>'}</div>`}
+function card(c){return `<div class="card" onclick="open_(${c.id})">${img(c.c)}<span class="tag">⭐ ${c.r} (${c.rv})</span></div><div class="cb"><h3>${c.n}</h3><div class="loc">📍 ${c.l}</div><div class="feat"><span>🛏 ${c.bd} غرف</span><span>👥 ${c.g} أفراد</span><span>${c.t}</span></div><div class="row" style="margin-top:10px"><div class="price">${fmt(c.p)} ج <small>/ الليلة</small></div><span class="st g">متاح</span></div></div></div>`}
+function rolebar(){return `<div class="role">${[['cus','عميل'],['own','مالك'],['adm','إدارة']].map(([k,v])=>`<div class="${S.role==k?'on':''}" onclick="S.role='${k}';S.tab=k=='cus'?'home':k=='own'?'odash':'adm';S.cur=null;draw()">${v}</div>`).join('')}</div>`}
+function open_(id){S.cur=CH.find(c=>c.id==id);S.sel=[];S.tab='det';draw()}
+function det(){const c=S.cur,bk=c.bk;const days=[...Array(30)].map((_,i)=>i+1);
+return `<div class="top"><span class="back" onclick="S.tab='home';S.cur=null;draw()">→</span><h2>${c.n}</h2></div>${img(c.c).replace('height:150px','height:190px')}</div><div class="pad">
+<div class="sec"><div class="row"><h4>${c.t}</h4><span class="star">⭐ ${c.r}</span></div><div class="feat" style="margin-bottom:10px">📍 ${c.l}</div><div class="feat"><span>🛏 ${c.bd} غرف</span><span>👥 حتى ${c.g} أفراد</span><span>المالك: ${c.o} ✔ موثّق</span></div></div>
+<div class="sec"><h4>المميزات</h4><div class="am">${c.am.map(a=>`<span>${a}</span>`).join('')}</div></div>
+<div class="sec"><h4>اختر أيام الحجز (ديسمبر 2026)</h4><div class="cal">${['س','ح','ن','ث','ر','خ','ج'].map(x=>`<div class="h">${x}</div>`).join('')}${[...Array(2)].map(()=>'<div></div>').join('')}${days.map(d=>`<div class="d ${bk.includes(d)?'x':S.sel.includes(d)?'s':''}" onclick="tg(${d})">${d}</div>`).join('')}</div>
+<div class="feat" style="margin-top:10px"><span>🟩 متاح</span><span>⬜ محجوز</span><span>🟦 اختيارك</span></div></div>
+${S.sel.length?sum(c):''}
+<div class="row" style="gap:10px"><button class="btn l" onclick="S.tab='chat';draw()">💬 تواصل مع المالك</button>${S.paid[c.id]?'':`<button class="btn" ${S.sel.length?'':'disabled'} onclick="S.modal='pay';draw()">احجز</button>`}</div>
+${S.paid[c.id]?`<div class="note ok" style="margin-top:12px">✅ تم دفع العربون. رقم المالك: <b dir="ltr">${c.ph}</b></div>`:'<div class="note">🔒 يظهر رقم المالك بعد دفع العربون (30%).</div>'}</div>`}
+function calc(c){const n=S.sel.length,tot=n*c.p;return{n,tot,dep:Math.round(tot*.3),fee:Math.round(tot*.15),rest:tot-Math.round(tot*.3)}}
+function sum(c){const k=calc(c);return `<div class="sec sum"><h4>ملخص الحجز</h4><div><span>${k.n} ليلة × ${fmt(c.p)}</span><span>${fmt(k.tot)} ج</span></div><div><span>العربون الآن (30%)</span><span>${fmt(k.dep)} ج</span></div><div><span>المتبقي للمالك عند الاستلام</span><span>${fmt(k.rest)} ج</span></div><div class="tot"><span>إجمالي الحجز</span><span>${fmt(k.tot)} ج</span></div></div>`}
+function tg(d){const c=S.cur;if(c.bk.includes(d)||S.paid[c.id])return;S.sel=S.sel.includes(d)?S.sel.filter(x=>x!=d):[...S.sel,d].sort((a,b)=>a-b);draw(true)}
+const NUM={'صفر':0,'زيرو':0,'واحد':1,'اتنين':2,'اثنين':2,'تلاتة':3,'ثلاثة':3,'اربعة':4,'أربعة':4,'خمسة':5,'ستة':6,'سبعة':7,'تمانية':8,'ثمانية':8,'تسعة':9,zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9};
+function hasPhone(t){let s=t.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+if(s.replace(/[^0-9]/g,'').length>=8)return true;
+let w=s.toLowerCase().split(/[\s,.\-_]+/).filter(x=>x in NUM||/^\d$/.test(x));return w.length>=6}
+function chat(){const c=S.cur||CH[0];const m=S.chats[c.id]||(S.chats[c.id]=[{w:'ot',t:'أهلاً بحضرتك، أنا '+c.o+'. اتفضل اسأل عن أي حاجة تخص الشاليه.'}]);
+return `<div class="top"><span class="back" onclick="S.tab=S.cur?'det':'home';draw()">→</span><h2>${c.o} · ${c.n}</h2></div><div class="chat"><div class="note" style="margin:10px">🔒 لحمايتك، يُمنع إرسال أرقام الهاتف داخل الشات. يظهر رقم المالك بعد دفع العربون.</div><div class="msgs" id="msgs">${m.map(x=>`<div class="m ${x.w}">${x.t}</div>`).join('')}</div><div class="cin"><input id="ci" placeholder="اكتب رسالتك..." onkeydown="if(event.key=='Enter')send()"><button onclick="send()">➤</button></div></div>`}
+function send(){const i=$('#ci'),t=i.value.trim();if(!t)return;const c=S.cur||CH[0],m=S.chats[c.id];
+if(hasPhone(t)){m.push({w:'sys',t:'⚠️ تم حجب الرسالة: ممنوع مشاركة أرقام الهاتف. أتمم الحجز ليظهر لك رقم المالك.'})}
+else{m.push({w:'me',t});const rep=['تمام، الشاليه متاح في الأيام اللي ظاهرة في التقويم.','نظام الدخول من الساعة 2 ظهراً والخروج 12 ظهراً.','أكيد، ممكن نتفق على أي تفاصيل بعد الحجز.'];setTimeout(()=>{m.push({w:'ot',t:rep[Math.floor(Math.random()*rep.length)]});if(S.tab=='chat')draw(true)},900)}
+draw(true)}
+function bookings(){const b=S.bookings;return `<header><h1>حجوزاتي</h1></header><div class="pad">${b.length?b.map(x=>`<div class="sec"><div class="row"><h4>${x.n}</h4><span class="st g">عربون مدفوع</span></div><div class="feat">${x.days} ليلة · إجمالي ${fmt(x.tot)} ج</div><div class="feat" style="margin-top:6px">رقم المالك: <b dir="ltr">${x.ph}</b></div></div>`).join(''):'<p style="text-align:center;color:var(--m);margin-top:40px">لا توجد حجوزات بعد</p>'}</div>`}
+function odash(){return `<header><h1>🏠 لوحة المالك</h1><p>أهلاً م. أحمد</p>${rolebar()}</header><div class="pad"><div class="stat"><div><b>${fmt(S.owner.length)}</b><span>شاليهاتي</span></div><div><b>${fmt(2+S.bookings.length)}</b><span>حجوزات</span></div><div><b>${fmt(14400+S.bookings.reduce((a,x)=>a+x.tot*.85,0))}</b><span>صافي الأرباح (ج)</span></div><div><b>4.8</b><span>التقييم</span></div></div>
+<div class="sec"><div class="row"><h4>شاليهاتي</h4></div>${S.owner.map(c=>`<div class="li"><span>${c.n}<br><small style="color:var(--m)">${fmt(c.p)} ج / ليلة</small></span><span class="st g">منشور</span></div>`).join('')}</div>
+<div class="sec"><h4>الحجوزات الأخيرة</h4><div class="li"><span>محمد علي · 3 ليالٍ</span><span class="st g">مؤكد</span></div><div class="li"><span>سارة أحمد · 2 ليلة</span><span class="st y">بانتظار العربون</span></div>${S.bookings.map(x=>`<div class="li"><span>أنت (عميل تجريبي) · ${x.days} ليالٍ</span><span class="st g">مؤكد</span></div>`).join('')}</div>
+<button class="btn o" onclick="S.tab='add';draw()">➕ إضافة شاليه جديد</button><div class="note" style="margin-top:12px">العمولة 15% تُخصم تلقائياً. المالك يستلم العربون بعد خصم العمولة، والباقي من العميل عند الاستلام.</div></div>`}
+function add(){return `<div class="top"><span class="back" onclick="S.tab='odash';draw()">→</span><h2>إضافة شاليه</h2></div><div class="pad"><input class="f" id="an" placeholder="اسم الشاليه"><input class="f" id="al" placeholder="المنطقة / الكمبوند"><input class="f" id="ap" type="number" placeholder="السعر لليلة (جنيه)"><select class="f" id="ab"><option>1 غرفة</option><option>2 غرفتين</option><option>3 غرف</option></select><div class="note">📷 رفع الصور وتحديد الأيام المتاحة متاح في النسخة الكاملة.</div><button class="btn" onclick="addc()">نشر</button></div>`}
+function addc(){const n=$('#an').value||'شاليه جديد',p=+$('#ap').value||2000;const c={id:Date.now(),n,l:$('#al').value||'العين السخنة',p,r:5,rv:0,bd:2,g:6,t:'شاليه',o:'م. أحمد',ph:'01000000000',c:["#be185d","#f9a8d4"],am:["تكييف","واي فاي"],bk:[]};S.owner.push(c);CH.push(c);S.tab='odash';draw()}
+function adm(){const rev=S.bookings.reduce((a,x)=>a+x.fee,0)+1850;return `<header><h1>🛡️ لوحة الإدارة</h1><p>مراقبة المنصة والعمولات</p>${rolebar()}</header><div class="pad"><div class="stat"><div><b>${fmt(CH.length)}</b><span>شاليهات</span></div><div><b>${fmt(12)}</b><span>ملاك</span></div><div><b>${fmt(23+S.bookings.length)}</b><span>حجوزات</span></div><div><b>${fmt(rev)}</b><span>عمولات المنصة (ج)</span></div></div>
+<div class="sec"><h4>طلبات توثيق الملاك</h4><div class="li"><span>أ. هاني · هوية + عقد ملكية</span><span class="st y">مراجعة</span></div><div class="li"><span>م. دينا · هوية + عقد ملكية</span><span class="st g">موثّق</span></div></div>
+<div class="sec"><h4>بلاغات الشات</h4><div class="li"><span>محاولة مشاركة رقم هاتف (محجوبة تلقائياً)</span><span class="st y">${Object.values(S.chats).flat().filter(x=>x.w=='sys').length+3}</span></div></div></div>`}
+function modal(){if(!S.modal)return '';const c=S.cur,k=calc(c);
+if(S.modal=='pay')return `<div class="modal"><div><h3 style="margin-bottom:10px">تأكيد الحجز والدفع</h3>${sum(c)}<div class="note">نسخة تجريبية: الدفع وهمي ولا يتم خصم أي مبلغ.</div><button class="btn g" onclick="payok()">ادفع العربون ${fmt(k.dep)} ج</button><button class="btn l" style="margin-top:8px" onclick="S.modal=null;draw()">إلغاء</button></div></div>`;
+return `<div class="modal"><div><div class="big">✅</div><h3 style="text-align:center">تم الحجز بنجاح</h3><p style="text-align:center;color:var(--m);font-size:13px;margin-top:6px">رقم المالك ${c.o}:</p><div class="ph">${c.ph}</div><button class="btn" onclick="S.modal=null;draw()">تمام</button></div></div>`}
+function payok(){const c=S.cur,k=calc(c);S.paid[c.id]=1;c.bk.push(...S.sel);S.bookings.push({n:c.n,days:k.n,tot:k.tot,fee:k.fee,ph:c.ph});S.sel=[];S.modal='done';draw()}
+function nav(){if(S.role!='cus')return '';return `<nav>${[['home','🏠','الرئيسية'],['chat','💬','الشات'],['bk','📅','حجوزاتي']].map(([k,i,v])=>`<div class="${S.tab==k||(k=='home'&&S.tab=='det')?'on':''}" onclick="S.tab='${k}';if(!S.cur&&'${k}'=='chat')S.cur=CH[0];draw()"><b>${i}</b>${v}</div>`).join('')}</nav>`}
+function draw(keep){const v={home,det,chat,bk:bookings,odash,add,adm}[S.tab]();const a=$('#app'),f=document.activeElement&&document.activeElement.id,pos=document.activeElement&&document.activeElement.selectionStart;
+a.innerHTML=v+nav()+modal();if(f){const e=document.getElementById(f);if(e){e.focus();try{e.setSelectionRange(pos,pos)}catch(_){}}}const m=$('#msgs');if(m)m.scrollTop=1e5}
+draw();
+</script></body></html>
